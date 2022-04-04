@@ -7,6 +7,8 @@ const createCustomer = async (req, res) => {
         email
     } = req.body;
 
+    console.log("name:", name, "phone", phone, "email", email)
+
     /**
      * This `create` will create a Customer AND create a new Contact, then automatically relate them with each other
      * @tutorial https://www.prisma.io/docs/concepts/components/prisma-client/relation-queries#create-a-related-record
