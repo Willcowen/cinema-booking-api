@@ -61,36 +61,27 @@ const addMovie = async (req, res) => {
   res.json({ data: createdMovie });
 };
 
-// const createMovie = async (req, res) => {
-//   const { title, runtimeMins } = req.body;
-
-//   console.log("title", title, "runtimeMins", runtimeMins);
-
-//   /**
-//    * This `create` will create a Customer AND create a new Contact, then automatically relate them with each other
-//    * @tutorial https://www.prisma.io/docs/concepts/components/prisma-client/relation-queries#create-a-related-record
-//    */
-//   const createdCustomer = await prisma.movie.create({
-//     data: {
-//       name,
-//       contact: {
-//         create: {
-//           phone,
-//           email,
-//         },
-//       },
-//     },
-//     // We add an `include` outside of the `data` object to make sure the new contact is returned in the result
-//     // This is like doing RETURNING in SQL
-//     include: {
-//       contact: true,
-//     },
-//   });
-
-//   res.json({ data: createdCustomer });
-// };
+ const getMovie =  async (req, res) => {
+  
+    console.log(req.params)
+    const whereClauses = {}
+    if (req.params.id) {
+        whereClauses.id = Number(req.params.id)
+    }
+    console.log(whereClauses)
+    const movie = await prisma.movie.findFirst({
+        where: whereClauses,
+      })
+      if (!movie){
+        res.status(404)
+        res.json({ error: 'Movie not found' })
+        return
+      }
+    res.json({test: movie})
+ }
 
 module.exports = {
   getMovies,
   addMovie,
+  getMovie
 };
