@@ -27,6 +27,9 @@ app.use('/customer', customerRouter);
 const moviesRouter = require('./routers/movies')
 app.use('/movies', moviesRouter);
 
+const screenRouter = require('./routers/screen')
+app.use('/screen', screenRouter);
+
 
 
 
