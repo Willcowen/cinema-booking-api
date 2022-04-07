@@ -12,7 +12,12 @@ const addTicket = async (req, res) => {
     },
     include: {
       customer: true,
-      screening: true,
+      screening: {
+          include: {
+              movie: true,
+              screen: true
+          }
+      },
     },
   });
   res.json({ screen: createdTicket});
